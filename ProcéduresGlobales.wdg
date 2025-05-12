@@ -1,0 +1,176 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : ProcéduresGlobales
+ major_version : 30
+ minor_version : 0
+ type : 7
+ description : ""
+ subtype : 0
+procedure_set :
+ identifier : 0x1821b92f001cf2b7
+ internal_properties : HgAAAB4AAABGLu41kG7fjQV3iS4F72qmnKaNh5694reolNKIW0iw
+ code_elements :
+  type_code : 31
+  p_codes : []
+  procedures :
+   -
+     name : fSurveilleRépertoire_Callback
+     procedure_id : 1738874671507269013
+     type_code : 15
+     code : |1+
+      //!
+      //! @brief <indiquez ici ce que fait la procédure>
+      //!
+      //! @param _sNomRepertoire  sNomRepertoire  <indiquez ici le rôle de sNomRepertoire>
+      //! @param sNomFichier  <indiquez ici le rôle de sNomFichier>
+      //!
+      //!
+      
+      PROCÉDURE fSurveilleRépertoire_Callback(_sNomRepertoire, sNomFichier,)
+      
+      	ExécuteThreadPrincipal(readJSON, _sNomRepertoire, sNomFichier)
+      
+     type : 458752
+   -
+     name : deleteRequest
+     procedure_id : 1738894991012632218
+     type_code : 15
+     code : |1-
+      
+      procédure deleteRequest(_route)
+      	cMaRequête is httpRequest
+      	cMaRequête.Méthode					= httpDelete
+      	cMaRequête.URL						= "https://onedoc.nexapi.ch" + _route //"https://onedoc.nexapi.ch/events/changes?afterChangeId=" + SAI_afterChangeId
+      	cMaRequête.Header["Authorization"]	= "Basic d2lubG9naWU6UGFzczR3aW5sb2dpZQ==" // TOKEN WINLOGIE
+      
+      	cMaRéponse	is httpResponse	= HTTPSend(cMaRequête)
+      	jsResult	est un JSON		= cMaRéponse.Contenu
+      
+      RETOUR cMaRéponse
+     type : 458752
+   -
+     name : getRequest
+     procedure_id : 1738894991012697926
+     type_code : 15
+     code : |1-
+      //!
+      //! @brief <indiquez ici ce que fait la procédure>
+      //!
+      //! @param _route  route  routes  <indiquez ici le rôle de routes>
+      //!
+      //! @return (httpRéponse)  <indiquez ici les valeurs possibles ainsi que leur interprétation>
+      //!
+      //!
+      
+      procédure getRequest(_route)
+      
+      	cMaRequête is httpRequest
+      	cMaRequête.URL						= "https://onedoc.nexapi.ch" + _route //"https://onedoc.nexapi.ch/events/changes?afterChangeId=" + SAI_afterChangeId
+      	cMaRequête.Header["Authorization"]	= "Basic d2lubG9naWU6UGFzczR3aW5sb2dpZQ==" // TOKEN WINLOGIE
+      
+      	cMaRéponse is httpResponse = HTTPSend(cMaRequête)
+      	jsResult est un JSON = cMaRéponse.Contenu
+      
+      RETOUR cMaRéponse
+     type : 458752
+   -
+     name : postRequest
+     procedure_id : 1738894991012763540
+     type_code : 15
+     code : |1+
+      //!
+      //! @brief <indiquez ici ce que fait la procédure>
+      //!
+      //! @param _route  route  <indiquez ici le rôle de route>
+      //! @param body  <indiquez ici le rôle de body>
+      //!
+      //! @return (httpRéponse)  <indiquez ici les valeurs possibles ainsi que leur interprétation>
+      //!
+      //!
+      
+      procédure postRequest(_route, body)
+      
+      	cMaRequête is httpRequest
+      	cMaRequête.Méthode					= httpPost
+      	cMaRequête.URL						= "https://onedoc.nexapi.ch" + _route
+      	cMaRequête.Header["Authorization"]	= "Basic d2lubG9naWU6UGFzczR3aW5sb2dpZQ==" // TOKEN WINLOGIE
+      	cMaRequête.ContentType				= typeMimeJSON
+      	cMaRequête.Contenu					= ChaîneVersUTF8(body)
+      	//cMaRequête.ProcédureTrace			= ProcTrace
+      	cMaRéponse	is httpResponse			= HTTPSend(cMaRequête)
+      
+      RETOUR cMaRéponse
+      
+     type : 458752
+   -
+     name : ProcTrace
+     procedure_id : 1738894991012829154
+     type_code : 15
+     code : |1+
+      procédure ProcTrace(nTypeInfo est entier, ...
+      
+      	bufByData est un Buffer)
+      	SELON nTypeInfo
+      		CAS httpTraceEntêteEnvoyé:
+      			Trace("Entete : ", ...
+      			UTF8VersChaîne(bufByData))
+      		CAS httpTraceDonnéeEnvoyée:
+      			Trace("Donnees : ", ...
+      			bufByData)
+      		CAS httpTraceEntêteRecu:
+      			Trace("Entête reçu : " + Remplace(UTF8VersChaîne(bufByData),RC,""))
+      		CAS httpTraceDonnéeRecue:
+      			Trace("Données reçues : " + Taille(bufByData))
+      	FIN
+      
+     type : 458752
+   -
+     name : toOneDoc
+     procedure_id : 1738895721157307683
+     type_code : 15
+     code : |1+
+      
+      procédure toOneDoc(fichier)
+      
+      	jsJSON est un JSON = fChargeTexte(fichier)
+      
+      	SWITCH jsJSON.action
+      		CASE "created":
+      			// postRequest
+      			Trace("Created")
+      		CASE "updated":
+      			// putRequest
+      			Trace("Updated")
+      		CASE "deleted":
+      			// deleteRequest
+      			Trace("Deleted")
+      	END
+      
+      
+      
+      
+     type : 458752
+   -
+     name : readJSON
+     procedure_id : 1738908468644444172
+     type_code : 15
+     code : |1+
+      
+      
+      procédure readJSON(directory, file)
+      
+      	toOneDoc(ComplèteRep(directory) + file)
+      
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : HgAAAB4AAADXPUOq6bQdTI/fs1mC0I6nimWl2G84EsAbne5i32IM05uoRA==
+  original_name : COL_SansNom1
+resources :
+ string_res :
+  identifier : 0x1821b92f001bf2b7
+  internal_properties : HgAAAB4AAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : HgAAAB4AAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ
