@@ -172,15 +172,15 @@ procedure_set :
       
       	// ON REMPLI LE TABLEAU ON REMPLACE LE NULL EN CHAINE VIDE ""
       
-      	tabDemos[1] = jsJSON.event.startDateTime = Null? "" else jsJSON.event.startDateTime
-      	tabDemos[2] = jsJSON.event.endDateTime = Null? "" else jsJSON.event.endDateTime
-      	tabDemos[3] = jsJSON.patient.id = Null? "" else jsJSON.patient.id
-      	tabDemos[4] = jsJSON.patient.firstName = Null? "" else jsJSON.patient.firstName
-      	tabDemos[5] = jsJSON.patient.lastName = Null? "" else jsJSON.patient.lastName
-      	tabDemos[6] = jsJSON.patient.gender = Null? "" else jsJSON.patient.gender
-      	tabDemos[7] = jsJSON.patient.birthDate = Null? "" else jsJSON.patient.birthDate
-      	tabDemos[8] = jsJSON.patient.email = Null? "" else jsJSON.patient.email
-      	tabDemos[9] = jsJSON.patient.mobilePhoneNumber = Null? "" else jsJSON.patient.mobilePhoneNumber
+      	tabDemos[1]  = jsJSON.event.startDateTime = Null? "" else jsJSON.event.startDateTime
+      	tabDemos[2]  = jsJSON.event.endDateTime = Null? "" else jsJSON.event.endDateTime
+      	tabDemos[3]  = jsJSON.patient.id = Null? "" else jsJSON.patient.id
+      	tabDemos[4]  = jsJSON.patient.firstName = Null? "" else jsJSON.patient.firstName
+      	tabDemos[5]  = jsJSON.patient.lastName = Null? "" else jsJSON.patient.lastName
+      	tabDemos[6]  = jsJSON.patient.gender = Null? "" else jsJSON.patient.gender
+      	tabDemos[7]  = jsJSON.patient.birthDate = Null? "" else jsJSON.patient.birthDate
+      	tabDemos[8]  = jsJSON.patient.email = Null? "" else jsJSON.patient.email
+      	tabDemos[9]  = jsJSON.patient.mobilePhoneNumber = Null? "" else jsJSON.patient.mobilePhoneNumber
       	tabDemos[10] = jsJSON.patient.insuranceCardNumber = Null? "" else jsJSON.patient.insuranceCardNumber
       	tabDemos[11] = jsJSON.patient.address.street = Null? "" else jsJSON.patient.address.street
       	tabDemos[12] = jsJSON.patient.address.streetNumber = Null? "" else jsJSON.patient.address.streetNumber
