@@ -11,6 +11,7 @@ procedure_set :
  identifier : 0x1821b92f001cf2b7
  internal_properties : HgAAAB4AAABGLu41kG7fjQV3iS4F72qmnKaNh5694reolNKIW0iw
  code_elements :
+  internal_properties : HgAAAB4AAABGUqz2CGil/Iu3s4iftNDrlweGIkIVg4RllbLbEE0v/UrVDUKsrNTA66594K61jsfJ/eu2zl43vC8/c1HXb2POpEjeBv76YiOzeYodG3Z1Gg69neQY4Rrmpt42pkzFvy0jxw==
   type_code : 31
   p_codes : []
   procedures :
@@ -27,10 +28,11 @@ procedure_set :
       //!
       //!
       
-      PROCÉDURE fSurveilleRépertoire_Callback(_sNomRepertoire, sNomFichier,)
+      PROCÉDURE fSurveilleRépertoire_Callback(_sNomRepertoire, sNomFichier)
       
-      	ExécuteThreadPrincipal(readJSON, _sNomRepertoire, sNomFichier)
-      
+      	ExécuteThreadPrincipalAsynchrone(readJSON, _sNomRepertoire, sNomFichier)
+      	sFile is string = CompleteRep(_sNomRepertoire) + sNomFichier
+      	//ExécuteThreadPrincipalAsynchrone(toOneDoc, sFile)
      type : 458752
    -
      name : deleteRequest
@@ -39,15 +41,15 @@ procedure_set :
      code : |1-
       
       procédure deleteRequest(_route)
-      	cMaRequête is httpRequest
-      	cMaRequête.Méthode					= httpDelete
-      	cMaRequête.URL						= "https://onedoc.nexapi.ch" + _route //"https://onedoc.nexapi.ch/events/changes?afterChangeId=" + SAI_afterChangeId
-      	cMaRequête.Header["Authorization"]	= "Basic d2lubG9naWU6UGFzczR3aW5sb2dpZQ==" // TOKEN WINLOGIE
       
-      	cMaRéponse	is httpResponse	= HTTPSend(cMaRequête)
-      	jsResult	est un JSON		= cMaRéponse.Contenu
+      	request is httpRequest
+      	request.Méthode					= httpDelete
+      	request.URL						= "https://onedoc.nexapi.ch" + _route
+      	request.Header["Authorization"]	= "Basic d2lubG9naWU6UGFzczR3aW5sb2dpZQ==" // TOKEN WINLOGIE
       
-      RETOUR cMaRéponse
+      	response is httpResponse	= HTTPSend(request)
+      
+      RETOUR response
      type : 458752
    -
      name : getRequest
@@ -59,48 +61,39 @@ procedure_set :
       //!
       //! @param _route  route  routes  <indiquez ici le rôle de routes>
       //!
-      //! @return (httpRéponse)  <indiquez ici les valeurs possibles ainsi que leur interprétation>
+      //! @return (non typé)  <indiquez ici les valeurs possibles ainsi que leur interprétation>
       //!
       //!
       
       procédure getRequest(_route)
       
-      	cMaRequête is httpRequest
-      	cMaRequête.URL						= "https://onedoc.nexapi.ch" + _route //"https://onedoc.nexapi.ch/events/changes?afterChangeId=" + SAI_afterChangeId
-      	cMaRequête.Header["Authorization"]	= "Basic d2lubG9naWU6UGFzczR3aW5sb2dpZQ==" // TOKEN WINLOGIE
+      	request is httpRequest
+      	request.URL						= "https://onedoc.nexapi.ch" + _route //"https://onedoc.nexapi.ch/events/changes?afterChangeId=" + SAI_afterChangeId
+      	request.Header["Authorization"]	= "Basic d2lubG9naWU6UGFzczR3aW5sb2dpZQ==" // TOKEN WINLOGIE
       
-      	cMaRéponse is httpResponse = HTTPSend(cMaRequête)
-      	jsResult est un JSON = cMaRéponse.Contenu
+      	response is httpResponse = HTTPSend(request)
       
-      RETOUR cMaRéponse
+      RETOUR response
      type : 458752
    -
      name : postRequest
      procedure_id : 1738894991012763540
      type_code : 15
      code : |1+
-      //!
-      //! @brief <indiquez ici ce que fait la procédure>
-      //!
-      //! @param _route  route  <indiquez ici le rôle de route>
-      //! @param body  <indiquez ici le rôle de body>
-      //!
-      //! @return (httpRéponse)  <indiquez ici les valeurs possibles ainsi que leur interprétation>
-      //!
-      //!
+      
       
       procédure postRequest(_route, body)
       
-      	cMaRequête is httpRequest
-      	cMaRequête.Méthode					= httpPost
-      	cMaRequête.URL						= "https://onedoc.nexapi.ch" + _route
-      	cMaRequête.Header["Authorization"]	= "Basic d2lubG9naWU6UGFzczR3aW5sb2dpZQ==" // TOKEN WINLOGIE
-      	cMaRequête.ContentType				= typeMimeJSON
-      	cMaRequête.Contenu					= ChaîneVersUTF8(body)
+      	request is httpRequest
+      	request.Method					= httpPost
+      	request.URL						= "https://onedoc.nexapi.ch" + _route
+      	request.Header["Authorization"]	= "Basic d2lubG9naWU6UGFzczR3aW5sb2dpZQ==" // TOKEN WINLOGIE
+      	request.ContentType				= mimeTypeJSON
+      	request.Content					= StringToUTF8(body)
       	//cMaRequête.ProcédureTrace			= ProcTrace
-      	cMaRéponse	is httpResponse			= HTTPSend(cMaRequête)
+      	response is httpResponse			= HTTPSend(request)
       
-      RETOUR cMaRéponse
+      return response
       
      type : 458752
    -
@@ -131,23 +124,157 @@ procedure_set :
      code : |1+
       
       procédure toOneDoc(fichier)
+      		procédure interne ecritDebug()
+      			FEN_index.SAI_Debug = "Test"
+      		fin
+      	jsTemplate is string = [
+      				{
+      				    "startDateTime": "%1",
+      				    "endDateTime": "%2",
+      				    "patient": {
+      				        "id": "%3",
+      				        "firstName": "%4",
+      				        "lastName": "%5",
+      				        "gender": "%6",
+      				        "birthDate": "%7",
+      				        "email": "%8",
+      				        "mobilePhoneNumber": "%9",
+      				        "insuranceCardNumber": "%10",
+      				        "address": {
+      				            "street": "%11",
+      				            "streetNumber": "%12",
+      				            "zipCode": "%13",
+      				            "city": "%14",
+      				            "state": "%15",
+      				            "country": "%16"
+      				        }
+      				    },
+      				    "appointmentType": {
+      				        "id": 7168231,
+      				        "name": "Winlogie"
+      				    },
+      				    "comment": "%17",
+      				    "enableReminderSmsNotification": %18,
+      				    "enableConfirmationEmailNotification": %19,
+      				    "externalId": "%20"
+      				}
+      	]
+      	tabDemos is array of 20 string
+      	jsJSON is JSON = fLoadText(fichier)
       
-      	jsJSON est un JSON = fChargeTexte(fichier)
-      
-      	SWITCH jsJSON.action
-      		CASE "created":
-      			// postRequest
-      			Trace("Created")
-      		CASE "updated":
-      			// putRequest
-      			Trace("Updated")
-      		CASE "deleted":
-      			// deleteRequest
-      			Trace("Deleted")
+      	SWITCH jsJSON.patient..Existe
+      		CASE false:
+      			let nRes = fDelete(fichier)
+      			IF nRes = False THEN ErrorInfo(errMessage)
+      			RETURN
       	END
       
+      	ecritDebug()
+      
+      	// ON REMPLI LE TABLEAU ON REMPLACE LE NULL EN CHAINE VIDE ""
+      
+      	tabDemos[1] = jsJSON.event.startDateTime = Null? "" else jsJSON.event.startDateTime
+      	tabDemos[2] = jsJSON.event.endDateTime = Null? "" else jsJSON.event.endDateTime
+      	tabDemos[3] = jsJSON.patient.id = Null? "" else jsJSON.patient.id
+      	tabDemos[4] = jsJSON.patient.firstName = Null? "" else jsJSON.patient.firstName
+      	tabDemos[5] = jsJSON.patient.lastName = Null? "" else jsJSON.patient.lastName
+      	tabDemos[6] = jsJSON.patient.gender = Null? "" else jsJSON.patient.gender
+      	tabDemos[7] = jsJSON.patient.birthDate = Null? "" else jsJSON.patient.birthDate
+      	tabDemos[8] = jsJSON.patient.email = Null? "" else jsJSON.patient.email
+      	tabDemos[9] = jsJSON.patient.mobilePhoneNumber = Null? "" else jsJSON.patient.mobilePhoneNumber
+      	tabDemos[10] = jsJSON.patient.insuranceCardNumber = Null? "" else jsJSON.patient.insuranceCardNumber
+      	tabDemos[11] = jsJSON.patient.address.street = Null? "" else jsJSON.patient.address.street
+      	tabDemos[12] = jsJSON.patient.address.streetNumber = Null? "" else jsJSON.patient.address.streetNumber
+      	tabDemos[13] = jsJSON.patient.address.zipCode = Null? "" else jsJSON.patient.address.zipCode
+      	tabDemos[14] = jsJSON.patient.address.city = Null? "" else jsJSON.patient.address.city
+      	tabDemos[15] = jsJSON.patient.address.state = Null? "" else jsJSON.patient.address.state
+      	tabDemos[16] = jsJSON.patient.address.country = Null? "" else jsJSON.patient.address.country
+      	tabDemos[17] = jsJSON.summary = Null? "" else jsJSON.summary
+      	tabDemos[18] = "false"
+      	tabDemos[19] = "false"
+      	tabDemos[20] = jsJSON.event.rdCleunik = Null? "" else jsJSON.event.rdCleunik
+      
+      	jsTemplate = StringBuild(jsTemplate,tabDemos)
+      	eventId is string
+      
+      	switch jsJSON.action
+      		case "created":
+      
+      			route = "/calendars/" + jsJSON.event.calendarId + "/events"
+      			httpResponse = postRequest(route,jsTemplate)
+      
+      			SWITCH httpResponse.StatusCode
+      				CASE 200
+      
+      					let nRes = fDelete(fichier)
+      					if nRes = False then ErrorInfo(errMessage)
+      
+      				OTHER CASE
+      					RETURN
+      			END
+      
+      		case "updated":
+      
+      			// ON GET LE eventId PAR RAPPORT AU externalId
+      			route = "/calendars/" + jsJSON.event.calendarId + "/external-event-links/externalId/" + jsJSON.event.rdCleunik
+      			httpResponse = getRequest(route)
+      			link is JSON = httpResponse.Content
+      
+      			switch httpResponse.StatusCode
+      				case 200:
+      					eventId = link.eventId
+      					// SYSLOG
+      
+      				other case
+      					//SYSLOG
+      					return
+      			end
+      
+      			// SI OK ALORS ON ROUTE PUT
+      			route = "/calendars/" + jsJSON.event.calendarId + "/events/" + eventId
+      			httpResponse = putRequest(route,jsTemplate)
+      			Trace(httpResponse.StatusCode)
+      			SWITCH httpResponse.StatusCode
+      				CASE 200:
+      					//ON SUPPRIME LE JSON
+      					let nRes = fDelete(fichier)
+      					IF nRes = False THEN ErrorInfo(errMessage)
+      
+      				OTHER CASE
+      					RETURN
+      			END
+      
+      		case "deleted":
+      			// ON GET LE eventId PAR RAPPORT AU externalId
+      			route			= "/calendars/" + jsJSON.event.calendarId + "/external-event-links/externalId/" + jsJSON.event.rdCleunik
+      			httpResponse	= getRequest(route)
+      			link is JSON = httpResponse.Content
+      
+      			SWITCH httpResponse.StatusCode
+      				CASE 200:
+      					eventId = link.eventId
+      					// SYSLOG
+      				OTHER CASE
+      					//SYSLOG
+      					RETURN
+      			END
+      
+      			route			= "/calendars/" + jsJSON.event.calendarId + "/events/" + eventId
+      			httpResponse	= deleteRequest(route)
+      
+      			SWITCH httpResponse.StatusCode
+      				CASE 204:
+      					//SYSLOG
+      					let nRes = fDelete(fichier)
+      					IF nRes = False THEN ErrorInfo(errMessage)
+      
+      					// ON SUPPRIME LE LINKS
       
       
+      				OTHER CASE
+      					RETURN
+      			END
+      	end
       
      type : 458752
    -
@@ -159,8 +286,27 @@ procedure_set :
       
       procédure readJSON(directory, file)
       
+      
       	toOneDoc(ComplèteRep(directory) + file)
       
+     type : 458752
+   -
+     name : putRequest
+     procedure_id : 1739193362468786926
+     type_code : 15
+     code : |1-
+      procédure putRequest(_route, body)
+      
+      	request is httpRequest
+      	request.Method					= httpPut
+      	request.URL						= "https://onedoc.nexapi.ch" + _route
+      	request.Header["Authorization"]	= "Basic d2lubG9naWU6UGFzczR3aW5sb2dpZQ==" // TOKEN WINLOGIE
+      	request.ContentType				= mimeTypeJSON
+      	request.Content					= StringToUTF8(body)
+      	//cMaRequête.ProcédureTrace			= ProcTrace
+      	response	is httpResponse			= HTTPSend(request)
+      
+      	RETURN response
      type : 458752
   procedure_templates : []
   property_templates : []

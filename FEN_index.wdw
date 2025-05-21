@@ -10,14 +10,51 @@ info :
 window :
  name : FEN_index
  identifier : 0x2821b4120143f817
- internal_properties : HgAAAB4AAADKOYPB8q4pwZWQ2qnOr5XfKIjolgrJt/jRPXsDbyDqab1H+3g2xSc3S1fU6uGBXUtAYUwSunjvY5UJg9ZvnGz1uQYktMXlqUF7BwpHtpfaVYWuPdrf38S+XTWbkX7L9IvbT6jZMQWVUJ8gJ+U31SLfQIIvI3mwNqo1E9STVKv71ks0n67bJOmbG4D+DW0a+lA0O6/hoSZA0zHUfmiUJ9JhCZqyOL+HZy0vbsygtTuH01xflUMCSA5GuTQRVlyAp0OKAzdGKigraPvglKC71ozTcO13znytDNpM/jA6Zp7jv6uBWbTi3hfAZ/AMwGs3VW2AhEfyvaGpODQ6u8AdBwAe5JAx5BRlutIElKwu9wTljrktABx/uE/jizhYPPwxOjljg65tBxSaP0A3zHqi6KjX9cBX2CcECn2czMWqVpUV3nnkk0zinHe+SOjguX+BtNfbuy4rqvUQHBE3UtuU05rVwQXI1cMqxO+JdMSCz0IDGuJrXS6D/giCe5EqiA6xmXEP6GWnlTLsRKBWXbr25zei7IR2ICodQPEWpXVVz7r8b/ZnoFciyeGtSSuH68NmmDBTBdyZ/jz7Vn9R0BP5PDuDO+xNw/Pg5a1G0yAZXhGSLQWGTF9cUT6YzKpT9+9pWOHjw+JpGVxON+ChoBWx
+ internal_properties : HgAAAB4AAACV0AGq03fYIcwYuhBXsmvuu6zTI+wLvm7RaFQgV0w0S8vRVMI6ETPCJololXoZKeI+GSeDIeb7pKxc77Kw0jeN78C2CwVwXVU0NOe1JW71L34HziaKLMz6xAOMoagOnDd7/btAEOn6Qlf68xpKTu24aNsg385AqjsIXv/9y5kV7XwzfnOtmUf/atWG+4WwxxPogha2eH5MvdjI1gAwQUkoY74LQE4iNlwLJmBNKgj2t6uDrGRUWmsUgn+0tROwiO5a2iMcuQkfrks/8EY+W/AO6vXqnHhxMvp/P+qeQVRJJBdHhXI9YIbjx4jtIvmQXivyQpI4NNhAPxb/P1zFgVoZb5jaJUBdztyGPc7PM+JjLXApVQkZOtFh+YsCawwDXNoQm5fAK27kowh+2k0+JECK8NZos+20phuCT/md5t83z5r4iKcocH82rGuyznmBEFAoHfHseI20oh/0DAZ+p6owzOXXsD/wcquBQb7Ty5KnreFfkPsvdF7sbX7SP2Y18XhufK5grodTLd38QqPGUQdBw1fzpkWwA240Ba/hBbkMuozQlXwfqtIN/CXE7qW/8sXoNvx7cSd9LipwooTdAfBOhrAePWRMkpVfTNhH4mQAOO5EhdFqraYj1TDx1/4jpnqcQVWrWqQJxfbJ454gDTK+SXud3UkjXsXVdIw=
  properties :
-  width : 1024
-  height : 768
-  widthClient : 1022
-  heightClient : 736
+  width : 1023
+  height : 233
+  widthClient : 1021
+  heightClient : 201
  style : {}
- controls : []
+ controls :
+  -
+    name : SAI_Debug
+    identifier : 0x28235c8c07cfc874
+    internal_properties : HgAAAB4AAAC2nj3hz2zWKCpyunoSA/wide+YgvIf9Gr4x4gfomj4LQ/J4t5qj6jQUpCVUuEBglQgXyBsh2H66Ls8MubE5ikqgFPwg7vKpBO8XGayvvxI63vc1lvGmSxDrVLGL12FE6xsCbUEvBe4gUjbJEqgaMgnh1T4+fStHnLS75W3fSjVzYwgfXbN7nhUFCMPWSDcLrMOFpKNEAVknk3jnjbGe6rV7TZT3PKXEdJRguOnbnEEVkE6UqxvjTEbLITOuI0iGu5rFI5VCvs6MI05mi07BjNPRH6Ox/XPTyR9OyZl+KPfPmj3ajWdqNvyPfC0IcUG070mmk5IDvIF3o2DeHm/OltSpOgubR7SXvNAUQtfkibPQOCrA14wJjuLAaPhpXxqgd7ceyQRS5lYfcB5dx0wbHaAtQ7a0pyboC6TUdfdUoBHYFSlorB3xZl+cUoXbxQtG6hioCD97nGkkBvpodUsaPWw/QtRteF/QY4I6yhMTVDhxiV+0+L8BbBt0RwW0gE0IfJcVY+kUreHOjUo5wmAhqgnexjEFyrwMhhHKqI7+jRwieagU8SQPmDNyiK+j0Ss3I72+th9J3ZkV1rLKMe89DKfKie+4f5bknIfCt5qatMGuAL/4sUif0PVVCPnMvP5UYzixftbvCds5t2mVOWy4KDMNiTGXQjCU78OPtcxh3Co73422jbV+2LRGM5cEYeEYPEXk6OzIOXv06PFygMExFFi/+F5dq4C1VaT3gYlxIuL4tVXWgFlMZHEKIU03EInjtAOByxKtsHHkiWyqUrQumhObeJmR0HV1Ye3tbkynFuNIjis5kLj8KupJvvLhRd4yqprhOP+RdzJfzpo2R3f8TH5Hzi/gYlK5dTSSVp96fVmsA59r+TZqLudETG5puKhEaTaiy//fK8Z3ytTV/v2iHQ27OWoGzT3qfiq8uMfSoer+RIoQxybNk8nHlAEQYSxIjzC9QjxtqMQu8ET5SilblzI5UfkRpPWk081uTXxE26WEqsDyGZ5OWGZypLUjgpxK0oYybM/UiK+MYN2mGIE/i75POXkPwTyPWUMgN7k314ulWjLKgo8CQBy9fnTvg0DSm9Hy/3P01DsUMgqSTtxImSNoWCC/rKVVsUb6lO+rgcIGYvj69TZY634ob6K4FhIg54g+IsHlxHyBcGxIqQpaPKElpAV7ZLu1JEiyxWF3EOGta7weFFwZZQGjEvt431WN9Wcha33Cobfj0Fdsll4mygdWm2YWn0/P5ktbtPKIpBd7wbDcHc+r+eM75nVk04qd5OfFsbw+0+yXt/cfJVffl2KR2na/ghGjzEWp8pr6/B2ToWvjHgC0BkCdF0VVYV2+bSC1aVt7OX0xBRym6CWwaQ5fPKxBSFOwpke4El23i2+BpzQB2ouMbYnpgQVSolxPFkftkJbHrilvOmO666V4hIQVNb0zFESH3KP2ldVy7jA
+    properties :
+     x : 152
+     y : 40
+     width : 863
+     height : 155
+     accelerator_key : 65535
+     tab_order : 0
+    style : {}
+    type : 2
+    code_elements :
+     type_code : 3
+     p_codes :
+      -
+        code : |1-
+         // Version 1
+         // Description 
+         // Champ de saisie pour un texte multiligne simple, sans mise en forme
+        type : 14
+      -
+        type : 276
+        enabled : false
+      -
+        type : 277
+        enabled : false
+      -
+        type : 278
+        enabled : false
+      -
+        type : 338
+        enabled : false
+      -
+        type : 339
+        enabled : false
  menu :
   name : _Menu
   identifier : 0x292573e513b5f221
@@ -37,6 +74,23 @@ window :
    -
      code : |1+
       PROCEDURE MaFenêtre()
+      
+      sListeFichier = fListFile(sNomRepertoire + "\*.JSON")
+      
+      FOR EACH STRING sFic OF sListeFichier SEPARATED BY CR
+      	toOneDoc(sFic)
+      END
+      
+      // La procédure fSurveilleRépertoire_Callback sera appelée
+      // lorsqu'un fichier ou un répertoire contenu dans le répertoire "C:\Temp\MonRep" sera modifié.
+      IF fWatchDirectory(sNomRepertoire, fSurveilleRépertoire_Callback, fwCreateFile) THEN
+      	// On informe l'utilisateur de la mise sous surveillance du répertoire
+      	//Info("La mise sous surveillance du répertoire " + sNomRepertoire + " a réussi.")
+      	//SYSLOG
+      ELSE
+      	// On informe l'utilisateur de l'échec de la mise sous surveillance du répertoire
+      	//Info("La mise sous surveillance du répertoire " + sNomRepertoire + " a échoué.")
+      END
    -
      code : |1+
       
@@ -68,6 +122,21 @@ window :
       
       
      type : 2
+  procedures :
+   -
+     name : afficheDebug
+     internal_properties : HgAAAB4AAADyHE4xQyuYNEDu/arewUAGkGo7mjZlH8qsJ4DbF+eMViViHIb8wvio3y+6DtcmRyKpMZwO9GXilByz5tWQzzxosahnE2dVXrVpcPtiwrcr7c96iV7U
+     procedure_id : 1739336874588647116
+     type_code : 14
+     code : |1+
+      procédure afficheDebug(message)
+      	SAI_Debug = message
+      
+      
+      
+     type : 458752
+  procedure_templates : []
+  property_templates : []
  code_parameters :
   internal_properties : HgAAAB4AAACEeedg5dLJphC9DHQRgJ0gwS0ZJSrtQCmlS6JGOuTjLkALfFcXzI9jV+AM+8JkFyzqtpQ0zgsHoWqhgXstNKne9Trtwbls8+6IlWtvg6eD+FHV
   original_name : Modele1
