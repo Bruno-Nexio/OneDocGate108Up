@@ -30,9 +30,8 @@ procedure_set :
       
       PROCÉDURE fSurveilleRépertoire_Callback(_sNomRepertoire, sNomFichier)
       
-      	ExécuteThreadPrincipalAsynchrone(readJSON, _sNomRepertoire, sNomFichier)
       	sFile is string = CompleteRep(_sNomRepertoire) + sNomFichier
-      	//ExécuteThreadPrincipalAsynchrone(toOneDoc, sFile)
+      	ExécuteThreadPrincipal(toOneDoc, sFile)
      type : 458752
    -
      name : deleteRequest
@@ -124,9 +123,11 @@ procedure_set :
      code : |1+
       
       procédure toOneDoc(fichier)
-      		procédure interne ecritDebug()
-      			FEN_index.SAI_Debug = "Test"
+      
+      		procédure interne syslogDebug(syslog)
+      			FEN_index.SAI_Debug = syslog
       		fin
+      
       	jsTemplate is string = [
       				{
       				    "startDateTime": "%1",
@@ -169,8 +170,6 @@ procedure_set :
       			RETURN
       	END
       
-      	ecritDebug()
-      
       	// ON REMPLI LE TABLEAU ON REMPLACE LE NULL EN CHAINE VIDE ""
       
       	tabDemos[1] = jsJSON.event.startDateTime = Null? "" else jsJSON.event.startDateTime
@@ -204,11 +203,9 @@ procedure_set :
       			httpResponse = postRequest(route,jsTemplate)
       
       			SWITCH httpResponse.StatusCode
-      				CASE 200
-      
+      				CASE 201
       					let nRes = fDelete(fichier)
       					if nRes = False then ErrorInfo(errMessage)
-      
       				OTHER CASE
       					RETURN
       			END
@@ -223,8 +220,7 @@ procedure_set :
       			switch httpResponse.StatusCode
       				case 200:
       					eventId = link.eventId
-      					// SYSLOG
-      
+      					syslogDebug(200)
       				other case
       					//SYSLOG
       					return
@@ -233,13 +229,12 @@ procedure_set :
       			// SI OK ALORS ON ROUTE PUT
       			route = "/calendars/" + jsJSON.event.calendarId + "/events/" + eventId
       			httpResponse = putRequest(route,jsTemplate)
-      			Trace(httpResponse.StatusCode)
+      			//Trace(httpResponse.StatusCode)
       			SWITCH httpResponse.StatusCode
       				CASE 200:
       					//ON SUPPRIME LE JSON
       					let nRes = fDelete(fichier)
       					IF nRes = False THEN ErrorInfo(errMessage)
-      
       				OTHER CASE
       					RETURN
       			END
