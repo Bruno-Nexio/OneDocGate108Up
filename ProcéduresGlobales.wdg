@@ -43,8 +43,8 @@ procedure_set :
       
       	request is httpRequest
       	request.Méthode					= httpDelete
-      	request.URL						= "https://onedoc.nexapi.ch" + _route
-      	request.Header["Authorization"]	= "Basic d2lubG9naWU6UGFzczR3aW5sb2dpZQ==" // TOKEN WINLOGIE
+      	request.URL						= uri + _route
+      	request.Header["Authorization"]	= "Basic " + authorization // TOKEN WINLOGIE
       
       	response is httpResponse	= HTTPSend(request)
       
@@ -67,8 +67,8 @@ procedure_set :
       procédure getRequest(_route)
       
       	request is httpRequest
-      	request.URL						= "https://onedoc.nexapi.ch" + _route //"https://onedoc.nexapi.ch/events/changes?afterChangeId=" + SAI_afterChangeId
-      	request.Header["Authorization"]	= "Basic d2lubG9naWU6UGFzczR3aW5sb2dpZQ==" // TOKEN WINLOGIE
+      	request.URL						= uri + _route 
+      	request.Header["Authorization"]	= "Basic " + authorization // TOKEN WINLOGIE
       
       	response is httpResponse = HTTPSend(request)
       
@@ -85,8 +85,8 @@ procedure_set :
       
       	request is httpRequest
       	request.Method					= httpPost
-      	request.URL						= "https://onedoc.nexapi.ch" + _route
-      	request.Header["Authorization"]	= "Basic d2lubG9naWU6UGFzczR3aW5sb2dpZQ==" // TOKEN WINLOGIE
+      	request.URL						= uri + _route
+      	request.Header["Authorization"]	= "Basic " + authorization // TOKEN WINLOGIE
       	request.ContentType				= mimeTypeJSON
       	request.Content					= StringToUTF8(body)
       	//cMaRequête.ProcédureTrace			= ProcTrace
@@ -229,7 +229,7 @@ procedure_set :
       			// SI OK ALORS ON ROUTE PUT
       			route = "/calendars/" + jsJSON.event.calendarId + "/events/" + eventId
       			httpResponse = putRequest(route,jsTemplate)
-      			//Trace(httpResponse.StatusCode)
+      
       			SWITCH httpResponse.StatusCode
       				CASE 200:
       					//ON SUPPRIME LE JSON
@@ -250,7 +250,8 @@ procedure_set :
       					eventId = link.eventId
       					// SYSLOG
       				OTHER CASE
-      					//SYSLOG
+      	 					let nRes = fDelete(fichier)
+      	 					IF nRes = False THEN ErrorInfo(errMessage)
       					RETURN
       			END
       
@@ -265,8 +266,8 @@ procedure_set :
       
       					// ON SUPPRIME LE LINKS
       
-      
       				OTHER CASE
+      					Trace("Hello")
       					RETURN
       			END
       	end
@@ -294,8 +295,8 @@ procedure_set :
       
       	request is httpRequest
       	request.Method					= httpPut
-      	request.URL						= "https://onedoc.nexapi.ch" + _route
-      	request.Header["Authorization"]	= "Basic d2lubG9naWU6UGFzczR3aW5sb2dpZQ==" // TOKEN WINLOGIE
+      	request.URL						= uri + _route
+      	request.Header["Authorization"]	= "Basic " + authorization // TOKEN WINLOGIE
       	request.ContentType				= mimeTypeJSON
       	request.Content					= StringToUTF8(body)
       	//cMaRequête.ProcédureTrace			= ProcTrace

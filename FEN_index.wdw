@@ -13,9 +13,9 @@ window :
  internal_properties : HgAAAB4AAACV0AGq03fYIcwYuhBXsmvuu6zTI+wLvm7RaFQgV0w0S8vRVMI6ETPCJololXoZKeI+GSeDIeb7pKxc77Kw0jeN78C2CwVwXVU0NOe1JW71L34HziaKLMz6xAOMoagOnDd7/btAEOn6Qlf68xpKTu24aNsg385AqjsIXv/9y5kV7XwzfnOtmUf/atWG+4WwxxPogha2eH5MvdjI1gAwQUkoY74LQE4iNlwLJmBNKgj2t6uDrGRUWmsUgn+0tROwiO5a2iMcuQkfrks/8EY+W/AO6vXqnHhxMvp/P+qeQVRJJBdHhXI9YIbjx4jtIvmQXivyQpI4NNhAPxb/P1zFgVoZb5jaJUBdztyGPc7PM+JjLXApVQkZOtFh+YsCawwDXNoQm5fAK27kowh+2k0+JECK8NZos+20phuCT/md5t83z5r4iKcocH82rGuyznmBEFAoHfHseI20oh/0DAZ+p6owzOXXsD/wcquBQb7Ty5KnreFfkPsvdF7sbX7SP2Y18XhufK5grodTLd38QqPGUQdBw1fzpkWwA240Ba/hBbkMuozQlXwfqtIN/CXE7qW/8sXoNvx7cSd9LipwooTdAfBOhrAePWRMkpVfTNhH4mQAOO5EhdFqraYj1TDx1/4jpnqcQVWrWqQJxfbJ454gDTK+SXud3UkjXsXVdIw=
  properties :
   width : 1023
-  height : 233
+  height : 488
   widthClient : 1021
-  heightClient : 201
+  heightClient : 456
  style : {}
  controls :
   -
@@ -26,7 +26,7 @@ window :
      x : 152
      y : 40
      width : 863
-     height : 155
+     height : 403
      accelerator_key : 65535
      tab_order : 0
     style : {}
