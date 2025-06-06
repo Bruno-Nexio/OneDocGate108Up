@@ -19,8 +19,8 @@ project :
     type : 1
     generation_name : OneDocGate108Up.exe
     version :
-     generation_version : 4
-     internal_generation_version : 4
+     generation_version : 17
+     internal_generation_version : 16
     language : 1
     64bits : true
     code_elements :
@@ -65,11 +65,15 @@ project :
       sListeFichier	is string
       sFic			is string
       sNomRepertoire is string = "C:\OneDoc" // Nom du répertoire à surveiller
+      
+      pingpong is boolean = True 
+      ping200 is boolean = False
+      
       route is string
       httpResponse is httpResponse
       
-      uri				est une chaîne	= INIRead("NEXAPI", "URI", "",fCurrentDir() + "\settings.ini")
-      authorization	est une chaîne	= INIRead("NEXAPI", "AUTHORIZATION", "", fCurrentDir() + "\settings.ini")
+      uri				is string	= INIRead("NEXAPI", "URI", "",fCurrentDir() + "\settings.ini")
+      authorization	is string	= INIRead("NEXAPI", "AUTHORIZATION", "", fCurrentDir() + "\settings.ini")
      type : 196608
    -
      code : |1+

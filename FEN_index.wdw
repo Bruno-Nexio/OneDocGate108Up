@@ -13,22 +13,22 @@ window :
  internal_properties : HgAAAB4AAACV0AGq03fYIcwYuhBXsmvuu6zTI+wLvm7RaFQgV0w0S8vRVMI6ETPCJololXoZKeI+GSeDIeb7pKxc77Kw0jeN78C2CwVwXVU0NOe1JW71L34HziaKLMz6xAOMoagOnDd7/btAEOn6Qlf68xpKTu24aNsg385AqjsIXv/9y5kV7XwzfnOtmUf/atWG+4WwxxPogha2eH5MvdjI1gAwQUkoY74LQE4iNlwLJmBNKgj2t6uDrGRUWmsUgn+0tROwiO5a2iMcuQkfrks/8EY+W/AO6vXqnHhxMvp/P+qeQVRJJBdHhXI9YIbjx4jtIvmQXivyQpI4NNhAPxb/P1zFgVoZb5jaJUBdztyGPc7PM+JjLXApVQkZOtFh+YsCawwDXNoQm5fAK27kowh+2k0+JECK8NZos+20phuCT/md5t83z5r4iKcocH82rGuyznmBEFAoHfHseI20oh/0DAZ+p6owzOXXsD/wcquBQb7Ty5KnreFfkPsvdF7sbX7SP2Y18XhufK5grodTLd38QqPGUQdBw1fzpkWwA240Ba/hBbkMuozQlXwfqtIN/CXE7qW/8sXoNvx7cSd9LipwooTdAfBOhrAePWRMkpVfTNhH4mQAOO5EhdFqraYj1TDx1/4jpnqcQVWrWqQJxfbJ454gDTK+SXud3UkjXsXVdIw=
  properties :
   width : 1023
-  height : 488
+  height : 216
   widthClient : 1021
-  heightClient : 456
+  heightClient : 184
  style : {}
  controls :
   -
     name : SAI_Debug
     identifier : 0x28235c8c07cfc874
-    internal_properties : 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
+    internal_properties : HgAAAB4AAAC2nj3hz2zWKCpyunoSA/wide+YgvIf9Gr4x4gfomj4LQ/J4t5qj6jQUpCVUuEBglQgXyBsh2H66Ls8MubE5ikqgFPwg7vKpBO8XGayvvxI63vc1lvGmSxDrVLGL12FE6xsCbUEvBe4gUjbJEqgaMgnh1T4+fStHnLS75W3fSjVzYwgfXbN7nhUFCMPWSDcLrMOFpKNEAVknk3jnjbGe6rV7TZT3PKXEdJRguOnbnEEVkE6UqxvjTEbLITOuI0iGu5rFI5VCvs6MI05mi07BjNPRH6Ox/XPTyR9OyZl+KPfPmj3ajWdqNvyPfC0IcUG070mmk5IDvIF3o2DeHm/OltSpOgubR7SXvNAUQtfkibPQOCrA14wJjuLAaPhpXxqgd7ceyQRS5lYfcB5dx0wbHaAtQ7a0pyboC6TUdfdUoBHYFSlorB3xZl+cUoXbxQtG6hioCD97nGkkBvpodUsaPWw/QtRteF/QY4I6yhMTVDhxiV+0+L8BbBt0RwW0gE0IfJcVY+kUreHOjUo5wmAhqgnexjEFyrwMhhHKqI7+jRwieagU8SQPmDNyiK+j0Ss3I72+th9J3ZkV1rLKMe89DKfKie+4f5bknIfCt5qatMGuAL/4sUif0PVVCPnMvP5UYzixftbvCds5t2mVOWy4KDMNiTGXQjCU78OPtcxh3Co73422jbV+2LRGM5cEYeEYPEXk6OzIOXv06PFygMExFFi/+F5dq4C1VaT3gYlxIuL4tVXWgFlMZHEKIU03EInjtAOByxKtsHHkiWyqUrQumhObeJmR0HV1Ye3tbkynFuNIjis5kLj8KupJvvLhRd4yqprhOP+RdzJfzpo2R3f8TH5Hzi/gYlK5dTSSVp96fVmsA59r+TZqLudETG5puKhEaTaiy//fK8Z3ytTV/v2iHQ27OWoGzT3qfiq8uMfSoer+RIoQxybNk8nHlAEQYSxIjzC9QjxtqMQu8ET5SilblzI5UfkRpPWk081uTXxE26WEqsDyGZ5OWGZypLUjgpxK0oYybM/UiK+MYN2mGIE/i75POXkPwTyPWUMgN7k314ulWjLKgo8CQBy9fnTvg0DSm9Hy/3P01DsUMgqSTtxImSNoWCC/rKVVsUb6lO+rgcIGYvj69TZY634ob6K4FhIg54g+IsHlxHyBcGxIqQpaPKElpAV7ZLu1JEiyxWF3EOGta7weFFwZZQGjEvt431WN9Wcha33Cobfj0Fdsll4mygdWm2YWn0/P5ktbtPKIpBd7wbDcHc+r+eM75nVk04qd5OfFsbw+0+yXt/cfJVffl2KR2na/ghGjzEWp8pr6/B2ToWvjHgC0BkCdF0VVYV2+bSC1aVt7OX0xBRym6CWwaQ5fPKxBSFOwpke4El23i2+BpzQB2ouMbYnpgQVSolxPFkftkJbHrilvOmO666V4hIQVNb0zFESH3KP2ldVy7jA
     properties :
      x : 152
      y : 40
      width : 863
-     height : 403
+     height : 138
      accelerator_key : 65535
-     tab_order : 0
+     tab_order : 1
     style : {}
     type : 2
     code_elements :
@@ -55,6 +55,34 @@ window :
       -
         type : 339
         enabled : false
+  -
+    name : BTN_checkFile
+    identifier : 0x2830140b00f1cdda
+    internal_properties : HgAAAB4AAADco79Km8wuxVergyQDQy+Bb02Qy5ITTOP8QHDWPt8gs4JTwA5L7ENoY+MMT2bKhlem2GTFmoVGJp22UIAZkoFoNgevKS+afrQbZPJE2erzn0BvH5Vdu2V9ejGWyo741gm+XWoF6HG+OOnVi3ojQiK86PnDr3r3nSgdE/Glw2ikoexmbPWrLiQAdotsnMIPIigVyir682XJjgwolZBNSCLud4B0abT9aw0mqM6YafVU9EqJplXsrDUlfnjVKAxBs25PLCn6E/bWeZeqMVlpq96JyLkDlBHT1Z+YFWj2XB56YmEcNBWgVP7KD6aScXMEmsXSoxp4p4WVmcnpAz/m3k7yAGIvscwPf99XcfVm8HfgYzDCD2N6pRmVxiMlTiGv8Is2vYVfVUkmTjuaM5h4QxrPpLrns2ustva44LWuBpGA0srh7ypE0tIY3WlU2C5J9MXC46JhFDVPx9WZE1l4CCApJvuUUQGH1/aKXpPGrIj+tP+wFxrJ/XXk4uZaQboTfr80GNPBs+C17G1GxfVUXFY8OpWy5/8MGCxAbQnx0uWxoyyGIfN7tzJhwwrh2zM6DFMAT3ooQ3J4dIxpa3wpBkzFRwy39sCPQq1gXG8ZGlvoKidzRvCMEvHhzIp6i/B+EpT3amLBvcQ9WSRe6oG/d0+dilfJ76IQSOBGcATJ+9kqLFHPqpzrEGi6ZbN8HpwnXbG15fUdZzYQBhED9BgiHQrnfeiSuqRCOYc5t/xIdeWoaUY0Kl932BhzrDKSfOhL5y5Gwl5v7yYpEnQOchfL5qgrGFtf1XtkvpcZx0l63b7dY/kMZ8ry+YXVjF7vQ1AV5jd+VbZJjkemHhaAWAjcwBwa+X5XzxZB/k9J4TFS+/iXoWexl8WdgCIRgzzln/CG9JuJMMqAfrkxadt3ZxCjJpV81/374pjf/JPcUhm4N2A=
+    properties :
+     x : 27
+     y : 40
+     width : 80
+     height : 24
+     accelerator_key : 65535
+     tab_order : 0
+    style : {}
+    type : 4
+    code_elements :
+     type_code : 4
+     p_codes :
+      -
+        code : |1+
+         // Au clique, on scrute le répertoire et s'il y a des fichiers en attente, on les gère
+         sListeFichier = fListFile(sNomRepertoire + "\*.JSON")
+         
+         FOR EACH STRING sFic OF sListeFichier SEPARATED BY CR
+         	toOneDoc(sFic)
+         END
+        type : 18
+      -
+        type : 161
+        enabled : false
  menu :
   name : _Menu
   identifier : 0x292573e513b5f221
@@ -75,11 +103,11 @@ window :
      code : |1+
       PROCEDURE MaFenêtre()
       
+      // Au démarrage de l'application, on scrute le répertoire et s'il y a des fichiers en attente, on les gère
       sListeFichier = fListFile(sNomRepertoire + "\*.JSON")
       
       FOR EACH STRING sFic OF sListeFichier SEPARATED BY CR
-      	
-      	toOneDoc(sFic)
+      	//toOneDoc(sFic)
       END
       
       // La procédure fSurveilleRépertoire_Callback sera appelée
@@ -92,6 +120,8 @@ window :
       	// On informe l'utilisateur de l'échec de la mise sous surveillance du répertoire
       	//Info("La mise sous surveillance du répertoire " + sNomRepertoire + " a échoué.")
       END
+      
+      heartBeat()
    -
      code : |1+
       

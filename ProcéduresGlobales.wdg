@@ -124,10 +124,11 @@ procedure_set :
       
       procédure toOneDoc(fichier)
       
+      		// Procédure interne pour interagir avec le UI
       		procédure interne syslogDebug(syslog)
       			FEN_index.SAI_Debug = syslog
       		fin
-      
+      		//Trace(fichier)
       	jsTemplate is string = [
       				{
       				    "startDateTime": "%1",
@@ -163,7 +164,8 @@ procedure_set :
       	tabDemos is array of 20 string
       	jsJSON is JSON = fLoadText(fichier)
       
-      	SWITCH jsJSON.patient..Existe
+      	// On supprime les json uniquements "patient"
+      	SWITCH jsJSON.event..Existe
       		CASE false:
       			let nRes = fDelete(fichier)
       			IF nRes = False THEN ErrorInfo(errMessage)
@@ -221,6 +223,10 @@ procedure_set :
       				case 200:
       					eventId = link.eventId
       					syslogDebug(200)
+      				CASE 404:
+      					let nRes = fDelete(fichier)
+      					IF nRes = False THEN ErrorInfo(errMessage)
+      					RETURN
       				other case
       					//SYSLOG
       					return
@@ -229,6 +235,8 @@ procedure_set :
       			// SI OK ALORS ON ROUTE PUT
       			route = "/calendars/" + jsJSON.event.calendarId + "/events/" + eventId
       			httpResponse = putRequest(route,jsTemplate)
+      			//Trace(route)
+      			//Trace("Suppression du json code " + httpResponse.StatusCode)
       
       			SWITCH httpResponse.StatusCode
       				CASE 200:
@@ -240,6 +248,7 @@ procedure_set :
       			END
       
       		case "deleted":
+      
       			// ON GET LE eventId PAR RAPPORT AU externalId
       			route			= "/calendars/" + jsJSON.event.calendarId + "/external-event-links/externalId/" + jsJSON.event.rdCleunik
       			httpResponse	= getRequest(route)
@@ -249,9 +258,11 @@ procedure_set :
       				CASE 200:
       					eventId = link.eventId
       					// SYSLOG
+      				CASE 404:
+       					let nRes = fDelete(fichier)
+       					IF nRes = False THEN ErrorInfo(errMessage)
+      					RETURN
       				OTHER CASE
-      	 					let nRes = fDelete(fichier)
-      	 					IF nRes = False THEN ErrorInfo(errMessage)
       					RETURN
       			END
       
@@ -264,12 +275,10 @@ procedure_set :
       					let nRes = fDelete(fichier)
       					IF nRes = False THEN ErrorInfo(errMessage)
       
-      					// ON SUPPRIME LE LINKS
-      
       				OTHER CASE
-      					Trace("Hello")
       					RETURN
       			END
+      
       	end
       
      type : 458752
@@ -303,6 +312,39 @@ procedure_set :
       	response	is httpResponse			= HTTPSend(request)
       
       	RETURN response
+     type : 458752
+   -
+     name : heartBeat
+     internal_properties : HgAAAB4AAADub0ZZX2Eypcl6H62DIXkK4QBb5qGqQUgPX40FwQZfiQRdCWxGHlxPJkBXpryJlLB8bfUj4MPpBdzWetptGRmuRAYH1wHwYfT08BoJliAmDmWM0iqrQ89e
+     procedure_id : 1742985715418117452
+     type_code : 15
+     code : |1+
+      // Procédure automatique :
+      // La procédure est exécutée manuellement, lors d'un appel dans le code
+      // Elle sera répétée en boucle, en attendant 10 secondes entre chaque appel
+      // Chaque appel suivant exécute une seule fois la procédure, sans timer
+      //
+      
+      procédure heartBeat()
+      
+      	route			= "/events/last-change-id"
+      	pong est une httpRéponse = getRequest(route)
+      
+      	SWITCH Vrai
+      		CASE pong.StatusCode = 502 OR pong.StatusCode = 0
+      			pingpong = 0
+      		CASE pong.StatusCode = 200 AND pingpong = 0
+      			pingpong = Vrai
+      			//Trace( "Retour de la normale et on envoi le buffer")
+      
+      			sListeFichier = fListFile(sNomRepertoire + "\*.JSON")
+      
+      			FOR EACH STRING sFic OF sListeFichier SEPARATED BY CR
+      				ExécuteTraitement(FEN_index.BTN_checkFile, trtClic)
+      			END
+      	END
+      
+      	//Trace(pong.StatusCode)
      type : 458752
   procedure_templates : []
   property_templates : []
