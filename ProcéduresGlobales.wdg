@@ -179,7 +179,7 @@ procedure_set :
       	tabDemos[3]  = jsJSON.patient.id = Null? "" else jsJSON.patient.id
       	tabDemos[4]  = jsJSON.patient.firstName = Null? "" else jsJSON.patient.firstName
       	tabDemos[5]  = jsJSON.patient.lastName = Null? "" else jsJSON.patient.lastName
-      	tabDemos[6]  = jsJSON.patient.gender = Null? "" else jsJSON.patient.gender
+      	tabDemos[6]  = jsJSON.patient.gender = Null? "male" else jsJSON.patient.gender
       	tabDemos[7]  = jsJSON.patient.birthDate = Null? "" else jsJSON.patient.birthDate
       	tabDemos[8]  = jsJSON.patient.email = Null? "" else jsJSON.patient.email
       	tabDemos[9]  = jsJSON.patient.mobilePhoneNumber = Null? "" else jsJSON.patient.mobilePhoneNumber
@@ -214,10 +214,13 @@ procedure_set :
       
       		case "updated":
       
+      			Trace("Updated")
       			// ON GET LE eventId PAR RAPPORT AU externalId
       			route = "/calendars/" + jsJSON.event.calendarId + "/external-event-links/externalId/" + jsJSON.event.rdCleunik
+      			Trace(route)
       			httpResponse = getRequest(route)
       			link is JSON = httpResponse.Content
+      			Trace(link)
       
       			switch httpResponse.StatusCode
       				case 200:
@@ -231,12 +234,12 @@ procedure_set :
       					//SYSLOG
       					return
       			end
-      
-      			// SI OK ALORS ON ROUTE PUT
+      			Trace(jsTemplate)
+      			// SI OK ALORS ON ROUTE LE PUT
       			route = "/calendars/" + jsJSON.event.calendarId + "/events/" + eventId
-      			httpResponse = putRequest(route,jsTemplate)
-      			//Trace(route)
-      			//Trace("Suppression du json code " + httpResponse.StatusCode)
+      			httpResponse = putRequest(route, jsTemplate)
+      			Trace(route)
+      			Trace("Suppression du json code " + httpResponse.StatusCode)
       
       			SWITCH httpResponse.StatusCode
       				CASE 200:

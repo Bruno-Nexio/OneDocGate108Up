@@ -19,8 +19,8 @@ project :
     type : 1
     generation_name : OneDocGate108Up.exe
     version :
-     generation_version : 17
-     internal_generation_version : 16
+     generation_version : 18
+     internal_generation_version : 17
     language : 1
     64bits : true
     code_elements :
