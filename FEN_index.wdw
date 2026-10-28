@@ -100,26 +100,31 @@ window :
   type_code : 1
   p_codes :
    -
-     code : |1+
-      PROCEDURE MaFenêtre()
+     code : |1-
+      PROCÉDURE MaFenêtre()
       
-      // Au démarrage de l'application, on scrute le répertoire et s'il y a des fichiers en attente, on les gère
-      sListeFichier = fListFile(sNomRepertoire + "\*.JSON")
+      // Activer la surveillance avant de parcourir les fichiers en attente.
+      // Ainsi, aucun nouveau fichier ne peut être perdu entre le scan et la surveillance.
+      bSurveillanceActive est un booléen = fSurveilleRépertoire( ...
+      sNomRepertoire, ...
+      fSurveilleRépertoire_Callback, ...
+      fsCréationFichier)
       
-      FOR EACH STRING sFic OF sListeFichier SEPARATED BY CR
-      	//toOneDoc(sFic)
-      END
+      SI bSurveillanceActive ALORS
+      	Trace("[UP] Surveillance active : " + sNomRepertoire)
+      SINON
+      	Trace("[UP][ERREUR] Impossible de surveiller : " + sNomRepertoire)
+      FIN
       
-      // La procédure fSurveilleRépertoire_Callback sera appelée
-      // lorsqu'un fichier ou un répertoire contenu dans le répertoire "C:\Temp\MonRep" sera modifié.
-      IF fWatchDirectory(sNomRepertoire, fSurveilleRépertoire_Callback, fwCreateFile) THEN
-      	// On informe l'utilisateur de la mise sous surveillance du répertoire
-      	//Info("La mise sous surveillance du répertoire " + sNomRepertoire + " a réussi.")
-      	//SYSLOG
-      ELSE
-      	// On informe l'utilisateur de l'échec de la mise sous surveillance du répertoire
-      	//Info("La mise sous surveillance du répertoire " + sNomRepertoire + " a échoué.")
-      END
+      // Reprendre tous les fichiers JSON laissés en attente après un arrêt ou un crash.
+      sListeFichier = fListeFichier(ComplèteRep(sNomRepertoire) + "*.JSON")
+      
+      POUR TOUT CHAÎNE sFic DE sListeFichier SÉPARÉE PAR RC
+      	SI sFic <> "" ALORS
+      		Trace("[UP] Reprise du fichier en attente : " + sFic)
+      		TraiteFichierOneDoc(sFic)
+      	FIN
+      FIN
       
       heartBeat()
    -
