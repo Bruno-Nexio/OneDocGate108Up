@@ -1,0 +1,7 @@
+[NEXAPI]
+URI=https://onedoc-dev.nexapi.ch
+AUTHORIZATION=BASE64_LOGIN_COLON_PASSWORD
+
+[UP]
+DIRECTORY=C:\Data\Public\OneDoc
+INTERVAL_MS=1000

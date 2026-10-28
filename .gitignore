@@ -12,6 +12,7 @@ Sauvegarde
 *.cache
 *.cpl
 *.env
+settings.ini
 *.rep
 *.waudit
 *.wdcoverage
