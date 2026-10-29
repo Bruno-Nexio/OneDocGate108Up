@@ -3,6 +3,8 @@
 # WINDEV – WEBDEV – WINDEV Mobile
 Backup
 Bin
+Exe
+InstallService_*
 cache.gestion de sources
 Corbeille
 Groupware
@@ -17,6 +19,8 @@ settings.ini
 *.rep
 *.waudit
 *.wdcoverage
+*.wdu
+*_SVC.wdf
 *.wpf
 HstDuree.log
 #
