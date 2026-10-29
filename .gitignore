@@ -11,6 +11,7 @@ Sauvegarde
 .tmp
 *.cache
 *.cpl
+*.ctx
 *.env
 settings.ini
 *.rep
